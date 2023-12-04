@@ -14,7 +14,7 @@ function Order() {
   const [displayLimit, setDisplayLimit] = useState(10);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/orders')
+    axios.get('https://radiant-sands-65015.herokuapp.com/api/orders')
       .then(response => {
         setOrders(response.data);
       })
@@ -24,7 +24,7 @@ function Order() {
   }, []);
 
   const createOrder = () => {
-    axios.post('http://localhost:3000/api/order', {
+    axios.post('https://radiant-sands-65015.herokuapp.com/api/order', {
       products: [{ name: productName, quantity: quantity }]
     })
     .then(response => {
@@ -39,7 +39,7 @@ function Order() {
   };
 
   const updateShippingInfo = () => {
-    axios.put(`http://localhost:3000/api/order/${selectedOrderId}/shipping`, {
+    axios.put(`https://radiant-sands-65015.herokuapp.com/api/order/${selectedOrderId}/shipping`, {
       trackingCompany,
       trackingNumber
     })
@@ -54,7 +54,7 @@ function Order() {
   };
   
   const updateOrderStatus = () => {
-    axios.put(`http://localhost:3000/api/order/${selectedOrderId}/status`, {
+    axios.put(`https://radiant-sands-65015.herokuapp.com/api/order/${selectedOrderId}/status`, {
       status
     })
     .then(response => {
