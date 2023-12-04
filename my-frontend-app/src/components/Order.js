@@ -12,7 +12,7 @@ function Order() {
   const [message, setMessage] = useState('');
   const [displayLimit, setDisplayLimit] = useState(10);
   const [selectedOrderStatus, setSelectedOrderStatus] = useState('');
-  const [selectedShippingInfo, setSelectedShippingInfo] = useState({
+  const [setSelectedShippingInfo] = useState({
     trackingCompany: '',
     trackingNumber: '',
   });
