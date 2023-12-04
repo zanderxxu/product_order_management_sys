@@ -12,7 +12,7 @@ function Order() {
   const [message, setMessage] = useState('');
   const [displayLimit, setDisplayLimit] = useState(10);
   const [selectedOrderStatus, setSelectedOrderStatus] = useState('');
-  const [setSelectedShippingInfo] = useState({
+  const [selectedShippingInfo, setSelectedShippingInfo] = useState({
     trackingCompany: '',
     trackingNumber: '',
   });
@@ -103,6 +103,28 @@ function Order() {
   const isUpdateShippingInfoInputValid = trackingCompany && trackingNumber;
   const isUpdateOrderStatusInputValid = status;
 
+  const onChangeOrderSelection = (e) => {
+    const selectedId = e.target.value;
+    setSelectedOrderId(selectedId);
+
+    const selectedOrder = orders.find(order => order._id === selectedId);
+    if (selectedOrder) {
+      setSelectedOrderStatus(selectedOrder.status);
+      setStatus(selectedOrder.status);
+
+      const { trackingCompany, trackingNumber } = selectedOrder.shippingInfo;
+      setSelectedShippingInfo({ trackingCompany, trackingNumber });
+      setTrackingCompany(trackingCompany);
+      setTrackingNumber(trackingNumber);
+    } else {
+      setSelectedOrderStatus('');
+      setStatus('');
+      setSelectedShippingInfo({ trackingCompany: '', trackingNumber: '' });
+      setTrackingCompany('');
+      setTrackingNumber('');
+    }
+  };
+
   return (
     <div>
       <h1>Order Management</h1>
@@ -171,28 +193,7 @@ function Order() {
       </div>
 
       <h2>Orders List</h2>
-      <select
-        onChange={(e) => {
-          setSelectedOrderId(e.target.value);
-          const selectedOrder = orders.find(
-            (order) => order._id === e.target.value
-          );
-          if (selectedOrder) {
-            setSelectedOrderStatus(selectedOrder.status);
-            setSelectedShippingInfo({
-              trackingCompany: selectedOrder.shippingInfo.trackingCompany,
-              trackingNumber: selectedOrder.shippingInfo.trackingNumber,
-            });
-          } else {
-            setSelectedOrderStatus('');
-            setSelectedShippingInfo({
-              trackingCompany: '',
-              trackingNumber: '',
-            });
-          }
-        }}
-        value={selectedOrderId || ''}
-      >
+      <select onChange={onChangeOrderSelection} value={selectedOrderId || ''}>
         <option value="">Select an Order</option>
         {orders.slice(0, displayLimit).map((order) => (
           <option key={order._id} value={order._id}>
@@ -214,4 +215,3 @@ function Order() {
 }
 
 export default Order;
-
