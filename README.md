@@ -31,3 +31,11 @@ Using back home button can return back to the main page.
 
 ** There will be a limitation in products list. Now it has been set to 10. If you want to see more products, please click show more button.
 
+### Analysis of Frontend and Backend Development for the Project:
+
+For the frontend, I chose to use React due to its strong scalability. In the frontend, I implemented a limit on the display number for dropdown menus to reduce latency. I believe that in the future, I will continue to develop this part and improve it into a loading mode for a more intuitive display.
+
+Regarding the backend, I opted for MongoDB Atlas for data storage because its cloud-based service greatly enhances scalability. Additionally, Atlas supports read/write splitting, which can improve performance, especially with high data volumes. However, the downside is the high cost. I also think there are certain issues with deploying the backend on Heroku. Currently, I have opened the database to all IPs, but I believe this poses some data exposure risks. In the future, I plan to establish a private database on Heroku and control a single IP to address this issue.
+
+Moreover, I think the project overall lacks security-related features. In the future, I will add user information checks and token verification for project security measures. I also plan to redesign the UI to make the frontend more aesthetically pleasing.
+
