@@ -126,8 +126,6 @@ function Product() {
       {displayLimit < products.length && (
         <button onClick={showMoreProducts}>Show More</button>
       )}
-
-      <Link to="/">Back to Home</Link>
       <button onClick={() => window.location.href = "/"}>Back to Home</button>
     </div>
   );
