@@ -1,2 +1,33 @@
 # product_order_management_sys
-A Full stack Product and order management system
+A Full stack project for Product and order management system. 
+
+The project uses the front-end and back-end separation mode, and the front-end is developed using the React framework and deployed to Netlify. The backend is developed using Node.js and MongoDB Atlas database. and deploy to Heroku. The link to access the app website is: https://main--dazzling-beignet-fe6b9c.netlify.app/
+
+## Functions
+### Products Management:
+1. create product:  
+User can create a new product just fill in the product name, price and stock quantity. Then click on the create product button. The success information will show in the bottom. If you did not add any information to the input text box, the create product button will be locked temporary. When you put the information, the button will work. If you create a product successfully, check the drop-down menu of the products list and you will find that the newly created product is in it.
+2. update product:  
+In order to update product, first select the product you want to update information in the products list. Then it's specific information will be displayed in the text input box including name price and stock quantity. Then after making changes, click the update product button. The success message will appear. In this way, the update is successful.
+3. reset:    
+Both of the above functions can use reset to delete the content in the text input box.
+4. back home:  
+Using back home button can return back to the main page.
+
+** There will be a limitation in products list. Now it has been set to 10. If you want to see more products, please click show more button.
+
+
+### Orders Management:
+1. create Order:  
+Fill in the product name in the input text box and select quantity. Then click the create order button. The create successful message will appear below. If no information is added to the input text box, the create order button will be temporarily disabled.
+2. Update Shipping Info:
+
+3. Update Order Status:
+
+4. reset:    
+Both of the above functions can use reset to delete the content in the text input box.
+5. back home:  
+Using back home button can return back to the main page.
+
+** There will be a limitation in products list. Now it has been set to 10. If you want to see more products, please click show more button.
+
