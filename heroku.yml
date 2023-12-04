@@ -1,0 +1,5 @@
+build:
+  buildpacks:
+    - url: heroku/nodejs
+  config:
+    PROJECT_PATH: back_end/
