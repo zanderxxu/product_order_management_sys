@@ -12,10 +12,6 @@ function Order() {
   const [message, setMessage] = useState('');
   const [displayLimit, setDisplayLimit] = useState(10);
   const [selectedOrderStatus, setSelectedOrderStatus] = useState('');
-  const [setSelectedShippingInfo] = useState({
-    trackingCompany: '',
-    trackingNumber: '',
-  });
 
   useEffect(() => {
     axios
@@ -73,6 +69,7 @@ function Order() {
       )
       .then((response) => {
         setMessage('Order status updated successfully!');
+        setSelectedOrderStatus(status);
         resetOrderStatusSelection();
       })
       .catch((error) => {
@@ -93,6 +90,7 @@ function Order() {
 
   const resetOrderStatusSelection = () => {
     setStatus('');
+    setSelectedOrderStatus('');
   };
 
   const showMoreOrders = () => {
@@ -109,17 +107,13 @@ function Order() {
 
     const selectedOrder = orders.find(order => order._id === selectedId);
     if (selectedOrder) {
-      setSelectedOrderStatus(selectedOrder.status);
       setStatus(selectedOrder.status);
-
-      const { trackingCompany, trackingNumber } = selectedOrder.shippingInfo;
-      setSelectedShippingInfo({ trackingCompany, trackingNumber });
-      setTrackingCompany(trackingCompany);
-      setTrackingNumber(trackingNumber);
+      setSelectedOrderStatus(selectedOrder.status);
+      setTrackingCompany(selectedOrder.shippingInfo.trackingCompany);
+      setTrackingNumber(selectedOrder.shippingInfo.trackingNumber);
     } else {
-      setSelectedOrderStatus('');
       setStatus('');
-      setSelectedShippingInfo({ trackingCompany: '', trackingNumber: '' });
+      setSelectedOrderStatus('');
       setTrackingCompany('');
       setTrackingNumber('');
     }
