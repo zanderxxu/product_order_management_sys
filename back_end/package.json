@@ -11,6 +11,6 @@
   },
   "scripts": {
     "test": "NODE_ENV=test mocha ./test/*.js",
-    "start": "node my-frontend-app/src/App.js"
+    "start": "node back_end/server.js"
   }
 }
