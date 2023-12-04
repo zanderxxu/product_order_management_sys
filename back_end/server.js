@@ -4,7 +4,10 @@ const path = require('path');
 const cors = require('cors');
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://main--dazzling-beignet-fe6b9c.netlify.app/',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+}));
 const mongoDBUri = process.env.MONGODB_URI || 'mongodb+srv://zxu01:90hOBddjWLY0Fi0b@cluster0.bey9sm7.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(mongoDBUri)
   .then(() => console.log('MongoDB Connected'))
