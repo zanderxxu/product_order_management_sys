@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 function Order() {
   const [productName, setProductName] = useState('');
@@ -12,59 +11,74 @@ function Order() {
   const [selectedOrderId, setSelectedOrderId] = useState('');
   const [message, setMessage] = useState('');
   const [displayLimit, setDisplayLimit] = useState(10);
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState('');
+  const [selectedShippingInfo, setSelectedShippingInfo] = useState({
+    trackingCompany: '',
+    trackingNumber: '',
+  });
 
   useEffect(() => {
-    axios.get('https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/orders')
-      .then(response => {
+    axios
+      .get('https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/orders')
+      .then((response) => {
         setOrders(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching orders:', error);
       });
   }, []);
 
   const createOrder = () => {
-    axios.post('https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/order', {
-      products: [{ name: productName, quantity: quantity }]
-    })
-    .then(response => {
-      setOrders([...orders, response.data]);
-      setMessage('Order created successfully!');
-      resetCreateOrderInputs();
-    })
-    .catch(error => {
-      console.error('Error creating order:', error);
-      setMessage('Error creating order.');
-    });
+    axios
+      .post('https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/order', {
+        products: [{ name: productName, quantity: quantity }],
+      })
+      .then((response) => {
+        setOrders([...orders, response.data]);
+        setMessage('Order created successfully!');
+        resetCreateOrderInputs();
+      })
+      .catch((error) => {
+        console.error('Error creating order:', error);
+        setMessage('Error creating order.');
+      });
   };
 
   const updateShippingInfo = () => {
-    axios.put(`https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/order/${selectedOrderId}/shipping`, {
-      trackingCompany,
-      trackingNumber
-    })
-    .then(response => {
-      setMessage('Shipping info updated successfully!');
-      resetShippingInfoInputs();
-    })
-    .catch(error => {
-      console.error('Error updating shipping info:', error);
-      setMessage('Error updating shipping info.');
-    });
+    axios
+      .put(
+        `https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/order/${selectedOrderId}/shipping`,
+        {
+          trackingCompany,
+          trackingNumber,
+        }
+      )
+      .then((response) => {
+        setMessage('Shipping info updated successfully!');
+        resetShippingInfoInputs();
+      })
+      .catch((error) => {
+        console.error('Error updating shipping info:', error);
+        setMessage('Error updating shipping info.');
+      });
   };
-  
+
   const updateOrderStatus = () => {
-    axios.put(`https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/order/${selectedOrderId}/status`, {
-      status
-    })
-    .then(response => {
-      setMessage('Order status updated successfully!');
-      resetOrderStatusSelection();
-    })
-    .catch(error => {
-      console.error('Error updating order status:', error);
-      setMessage('Error updating order status.');
-    });
+    axios
+      .put(
+        `https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/order/${selectedOrderId}/status`,
+        {
+          status,
+        }
+      )
+      .then((response) => {
+        setMessage('Order status updated successfully!');
+        resetOrderStatusSelection();
+      })
+      .catch((error) => {
+        console.error('Error updating order status:', error);
+        setMessage('Error updating order status.');
+      });
   };
 
   const resetCreateOrderInputs = () => {
@@ -93,58 +107,98 @@ function Order() {
     <div>
       <h1>Order Management</h1>
       <div>
-        <input 
+        <input
           type="text"
           value={productName}
-          onChange={e => setProductName(e.target.value)}
+          onChange={(e) => setProductName(e.target.value)}
           placeholder="Product Name"
         />
-        <input 
+        <input
           type="number"
           value={quantity}
-          onChange={e => setQuantity(e.target.value)}
+          onChange={(e) => setQuantity(e.target.value)}
           placeholder="Quantity"
         />
-        <button onClick={createOrder} disabled={!isCreateOrderInputValid}>Create Order</button>
+        <button onClick={createOrder} disabled={!isCreateOrderInputValid}>
+          Create Order
+        </button>
         <button onClick={resetCreateOrderInputs}>Reset</button>
       </div>
 
       <h2>Update Shipping Info</h2>
+      <p>Please click the Order in the Orders List to update the Information</p>
       <div>
-        <input 
+        <input
           type="text"
           value={trackingCompany}
-          onChange={e => setTrackingCompany(e.target.value)}
+          onChange={(e) => setTrackingCompany(e.target.value)}
           placeholder="Tracking Company"
         />
-        <input 
+        <input
           type="text"
           value={trackingNumber}
-          onChange={e => setTrackingNumber(e.target.value)}
+          onChange={(e) => setTrackingNumber(e.target.value)}
           placeholder="Tracking Number"
         />
-        <button onClick={updateShippingInfo} disabled={!isUpdateShippingInfoInputValid}>Update Shipping Info</button>
+        <button
+          onClick={updateShippingInfo}
+          disabled={!isUpdateShippingInfoInputValid}
+        >
+          Update Shipping Info
+        </button>
         <button onClick={resetShippingInfoInputs}>Reset</button>
       </div>
 
       <h2>Update Order Status</h2>
+      <p>Please click the Order in the Orders List to update the Information</p>
       <div>
-        <select value={status} onChange={e => setStatus(e.target.value)}>
+        <select
+          value={selectedOrderStatus}
+          onChange={(e) => setSelectedOrderStatus(e.target.value)}
+        >
           <option value="">Select Status</option>
           <option value="processing">Processing</option>
           <option value="canceled">Canceled</option>
           <option value="delivered">Delivered</option>
         </select>
-        <button onClick={updateOrderStatus} disabled={!isUpdateOrderStatusInputValid}>Update Status</button>
+        <button
+          onClick={updateOrderStatus}
+          disabled={!isUpdateOrderStatusInputValid}
+        >
+          Update Status
+        </button>
         <button onClick={resetOrderStatusSelection}>Reset</button>
       </div>
 
-      <h2>Order List</h2>
-      <select onChange={e => setSelectedOrderId(e.target.value)}>
+      <h2>Orders List</h2>
+      <select
+        onChange={(e) => {
+          setSelectedOrderId(e.target.value);
+          const selectedOrder = orders.find(
+            (order) => order._id === e.target.value
+          );
+          if (selectedOrder) {
+            setSelectedOrderStatus(selectedOrder.status);
+            setSelectedShippingInfo({
+              trackingCompany: selectedOrder.shippingInfo.trackingCompany,
+              trackingNumber: selectedOrder.shippingInfo.trackingNumber,
+            });
+          } else {
+            setSelectedOrderStatus('');
+            setSelectedShippingInfo({
+              trackingCompany: '',
+              trackingNumber: '',
+            });
+          }
+        }}
+        value={selectedOrderId || ''}
+      >
         <option value="">Select an Order</option>
-        {orders.slice(0, displayLimit).map(order => (
+        {orders.slice(0, displayLimit).map((order) => (
           <option key={order._id} value={order._id}>
-            {order.products.map(p => `${p.name} (Qty: ${p.quantity})`).join(', ')} - ID: {order._id}
+            {order.products
+              .map((p) => `${p.name} (Qty: ${p.quantity})`)
+              .join(', ')} - ID: {order._id}
           </option>
         ))}
       </select>
@@ -154,9 +208,10 @@ function Order() {
 
       {message && <p>{message}</p>}
 
-      <Link to="/">Back to Home</Link>
+      <button onClick={() => window.location.href = "/"}>Back to Home</button>
     </div>
   );
 }
 
 export default Order;
+

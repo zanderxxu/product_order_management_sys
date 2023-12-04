@@ -88,7 +88,8 @@ function Product() {
 
   return (
     <div>
-      <h1>Product Management</h1>
+      <h1>Products Management</h1>
+      <p>Please click the Product in the Products List to update the Information</p>
       <input 
         type="text" 
         value={productName} 
@@ -127,6 +128,7 @@ function Product() {
       )}
 
       <Link to="/">Back to Home</Link>
+      <button onClick={() => window.location.href = "/"}>Back to Home</button>
     </div>
   );
 }
