@@ -20,13 +20,13 @@ Using back home button can return back to the main page.
 ### Orders Management:
 1. create Order:  
 Fill in the product name in the input text box and select quantity. Then click the create order button. The create successful message will appear below. If no information is added to the input text box, the create order button will be temporarily disabled.
-2. Update Shipping Info:
-
-3. Update Order Status:
-
-4. reset:    
+2. Update Shipping Info:  
+Select the order you want to modify in the orders list. The tracking company and tracking number will be displayed in the input text box. Modify the content you want to modify and click the update shipping info button. The modification success message will be displayed below. If there is no information in the input text box, the button will be temporarily locked.
+3. Update Order Status:  
+Select the order you want to modify in the orders list. The status will be displayed in the input text box. Select the status you want in the drop-down menu. Click the update status button. The modification success message will be displayed below. If there is no information in the input text box, the button will be temporarily locked.
+5. reset:      
 Both of the above functions can use reset to delete the content in the text input box.
-5. back home:  
+6. back home:  
 Using back home button can return back to the main page.
 
 ** There will be a limitation in products list. Now it has been set to 10. If you want to see more products, please click show more button.
