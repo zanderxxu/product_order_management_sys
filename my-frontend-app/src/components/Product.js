@@ -12,7 +12,7 @@ function Product() {
   const [displayLimit, setDisplayLimit] = useState(10); 
 
   useEffect(() => {
-    axios.get('https://radiant-sands-65015.herokuapp.com/api/products')
+    axios.get('https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/products')
       .then(response => {
         setProducts(response.data);
       })
@@ -22,7 +22,7 @@ function Product() {
   }, []);
 
   const createProduct = () => {
-    axios.post('https://radiant-sands-65015.herokuapp.com/api/product', {
+    axios.post('https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/product', {
       name: productName,
       price: productPrice,
       stockQuantity: stockQuantity
@@ -40,7 +40,7 @@ function Product() {
 
   const updateProduct = () => {
     if (selectedProductId) {
-      axios.put(`https://radiant-sands-65015.herokuapp.com/api/product/${selectedProductId}`, {
+      axios.put(`https://radiant-sands-65015-6cb5ddc7695c.herokuapp.com/api/product/${selectedProductId}`, {
         name: productName,
         price: productPrice,
         stockQuantity: stockQuantity
